@@ -7,7 +7,7 @@
     "dev": "pnpm with-env next dev",
     "start": "pnpm with-env next start",
     "with-env": "dotenv -e .env --",
-    "push": "drizzle-kit push:mysql"
+    "push": "drizzle-kit push:pg --config ./src/backend/db/drizzle.config.ts"
   },
   "dependencies": {
     "@neondatabase/serverless": "^0.6.0",

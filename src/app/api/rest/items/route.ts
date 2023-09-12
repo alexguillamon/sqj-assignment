@@ -5,7 +5,7 @@ import { db, insertItemsSchema, items } from "~/backend/db";
 export async function GET(request: Request) {
   try {
     const items = await db.query.items.findMany();
-    return new Response(JSON.stringify(items));
+    return new Response(JSON.stringify({ data: items }));
   } catch (error) {
     if (error instanceof Error) {
       return new Response(JSON.stringify({ message: error.message }), {
@@ -28,9 +28,9 @@ export async function POST(request: Request) {
     const item = insertItemsSchema.parse(data);
 
     // Insert the data into the database
-    const result = await db.insert(items).values(data).returning();
+    const result = await db.insert(items).values(item).returning();
     // Return the inserted data
-    return new Response(JSON.stringify(result));
+    return new Response(JSON.stringify({ data: result }));
   } catch (error) {
     // Handle validation errors
     if (error instanceof z.ZodError) {

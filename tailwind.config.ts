@@ -7,5 +7,6 @@ export default {
   plugins: [
     require("@tailwindcss/aspect-ratio"),
     require("@tailwindcss/typography"),
+    require("@tailwindcss/forms"),
   ],
 } satisfies Config;

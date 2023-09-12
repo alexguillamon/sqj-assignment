@@ -17,7 +17,7 @@ export default async function AdminPage() {
           <Link href={"/admin/add"}>
             <button
               type="button"
-              className="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              className="block rounded-md bg-primary-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-primary-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600"
             >
               Add item
             </button>
@@ -81,7 +81,7 @@ export default async function AdminPage() {
                       <td className="flex flex-col sm:flex-row gap-x-3 relative whitespace-nowrap py-4 pr-4 text-right text-sm font-medium w-16">
                         <Link
                           href={`/admin/${item.id}/edit`}
-                          className="text-indigo-600 hover:text-indigo-900"
+                          className="text-primary-600 hover:text-primary-900"
                         >
                           Edit<span className="sr-only">, {item.name}</span>
                         </Link>

@@ -10,50 +10,50 @@ const navigation = {
       name: "Techies",
       clothing: [
         [
-          { name: "Pants", href: "#" },
-          { name: "Denim", href: "#" },
-          { name: "Sweaters", href: "#" },
-          { name: "T-Shirts", href: "#" },
+          { name: "Pants", href: "/" },
+          { name: "Denim", href: "/" },
+          { name: "Sweaters", href: "/" },
+          { name: "T-Shirts", href: "/" },
         ],
         [
-          { name: "Jackets", href: "#" },
-          { name: "Activewear", href: "#" },
-          { name: "Shorts", href: "#" },
-          { name: "Swimwear", href: "#" },
+          { name: "Jackets", href: "/" },
+          { name: "Activewear", href: "/" },
+          { name: "Shorts", href: "/" },
+          { name: "Swimwear", href: "/" },
         ],
       ],
       accessories: [
-        { name: "Shoes", href: "#" },
-        { name: "Socks", href: "#" },
-        { name: "Hats", href: "#" },
+        { name: "Shoes", href: "/" },
+        { name: "Socks", href: "/" },
+        { name: "Hats", href: "/" },
       ],
       categories: [
-        { name: "New Arrivals", href: "#" },
-        { name: "Sale", href: "#" },
+        { name: "New Arrivals", href: "/" },
+        { name: "Sale", href: "/" },
       ],
     },
     {
       name: "Non-Techies",
       clothing: [
         [
-          { name: "Pants", href: "#" },
-          { name: "Jackets", href: "#" },
-          { name: "T-Shirts", href: "#" },
-          { name: "Hoodies", href: "#" },
+          { name: "Pants", href: "/" },
+          { name: "Jackets", href: "/" },
+          { name: "T-Shirts", href: "/" },
+          { name: "Hoodies", href: "/" },
         ],
         [
-          { name: "Vests", href: "#" },
-          { name: "Outdoors", href: "#" },
-          { name: "Capes", href: "#" },
+          { name: "Vests", href: "/" },
+          { name: "Outdoors", href: "/" },
+          { name: "Capes", href: "/" },
         ],
       ],
       accessories: [
-        { name: "Watches", href: "#" },
-        { name: "Sunglasses", href: "#" },
+        { name: "Watches", href: "/" },
+        { name: "Sunglasses", href: "/" },
       ],
       categories: [
-        { name: "Just Added", href: "#" },
-        { name: "Clearance", href: "#" },
+        { name: "Just Added", href: "/" },
+        { name: "Clearance", href: "/" },
       ],
     },
   ],
@@ -67,7 +67,7 @@ function classNames(...classes: string[]) {
 export default function Header() {
   return (
     <div className="bg-white">
-      <header className="relative bg-white z-10">
+      <header className="relative bg-white">
         <nav aria-label="Top" className="mx-auto max-w-7xl sm:px-6 lg:px-8">
           <div className="border-b border-gray-200 px-4 pb-14 sm:px-0 sm:pb-0">
             <div className="flex h-16 items-center justify-between">
@@ -109,7 +109,7 @@ export default function Header() {
                             leaveFrom="opacity-100"
                             leaveTo="opacity-0"
                           >
-                            <Popover.Panel className="absolute inset-x-0 top-full text-gray-500 sm:text-sm">
+                            <Popover.Panel className="absolute inset-x-0 top-full text-gray-500 sm:text-sm z-10">
                               {/* Presentational element used to render the bottom shadow, if we put the shadow on the actual panel it pokes out the top, so we use this shorter element to hide the top of the shadow */}
                               <div
                                 className="absolute inset-0 top-1/2 bg-white shadow"
@@ -139,12 +139,12 @@ export default function Header() {
                                                   key={item.name}
                                                   className="flex"
                                                 >
-                                                  <a
+                                                  <Link
                                                     href={item.href}
                                                     className="hover:text-gray-800"
                                                   >
                                                     {item.name}
-                                                  </a>
+                                                  </Link>
                                                 </li>
                                               )
                                             )}

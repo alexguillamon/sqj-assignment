@@ -1,3 +1,4 @@
+import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import { fromZodError } from "zod-validation-error";
 import { db, insertItemsSchema, items } from "~/backend/db";
@@ -30,6 +31,7 @@ export async function POST(request: Request) {
     // Insert the data into the database
     const result = await db.insert(items).values(item).returning();
     // Return the inserted data
+    revalidatePath("/admin");
     return new Response(JSON.stringify({ data: result[0] }));
   } catch (error) {
     // Handle validation errors

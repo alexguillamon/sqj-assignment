@@ -1,3 +1,4 @@
+import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import { fromZodError } from "zod-validation-error";
 import { db, eq, insertItemsSchema, items } from "~/backend/db";
@@ -52,6 +53,7 @@ export async function PUT(
       .returning();
 
     if (result.length > 0) {
+      revalidatePath("/admin");
       return new Response(JSON.stringify({ data: result[0] }));
     } else {
       return new Response(JSON.stringify({ message: "Item not found" }), {
@@ -99,6 +101,8 @@ export async function DELETE(
       .returning();
 
     if (result.length > 0) {
+      revalidatePath("/admin");
+
       return new Response(
         JSON.stringify({ message: "success", data: result[0] })
       );

@@ -63,7 +63,11 @@ export default async function ProductPage({
                   {item.name}
                 </h1>
                 <p className="text-xl font-medium text-gray-900">
-                  ${parseFloat(item.price).toFixed(2)}
+                  $
+                  {parseFloat(item.price).toLocaleString("en-US", {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2,
+                  })}
                 </p>
               </div>
             </div>

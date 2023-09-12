@@ -6,25 +6,6 @@ const breadcrumbs = [
   { id: 2, name: "The Best Collection", href: "/" },
 ];
 
-const product = {
-  name: "Basic Tee",
-  price: "$35",
-  href: "#",
-
-  image:
-    "https://tailwindui.com/img/ecommerce-images/product-page-01-featured-product-shot.jpg",
-  description: `
-    <p>The Basic tee is an honest new take on a classic. The tee uses super soft, pre-shrunk cotton for true comfort and a dependable fit. They are hand cut and sewn locally, with a special dye technique that gives each tee it's own look.</p>
-    <p>Looking to stock your closet? The Basic tee also comes in a 3-pack or 5-pack at a bundle discount.</p>
-  `,
-  details: [
-    "Only the best materials",
-    "Ethically and locally made",
-    "Pre-washed and pre-shrunk",
-    "Machine wash cold with similar colors",
-  ],
-};
-
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
@@ -91,9 +72,7 @@ export default async function ProductPage({
             <div className="mt-8 lg:col-span-7 lg:col-start-1 lg:row-span-3 lg:row-start-1 lg:mt-0">
               <div className="grid grid-cols-1 lg:grid-cols-2 lg:gap-8">
                 <img
-                  src={
-                    "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg"
-                  }
+                  src={item.imageUrl}
                   alt={item.name}
                   className={"lg:col-span-2 lg:row-span-2 rounded-lg"}
                 />
@@ -115,7 +94,12 @@ export default async function ProductPage({
 
                 <div className="prose prose-sm mt-4 text-gray-500">
                   <ul role="list">
-                    {product.details.map((item) => (
+                    {[
+                      "Only the best materials",
+                      "Ethically and locally made",
+                      "Pre-washed and pre-shrunk",
+                      "Machine wash cold with similar colors",
+                    ].map((item) => (
                       <li key={item}>{item}</li>
                     ))}
                   </ul>

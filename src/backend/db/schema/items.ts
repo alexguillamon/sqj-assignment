@@ -5,6 +5,7 @@ export const items = pgTable("items", {
   name: text("name").notNull(),
   description: text("description").notNull(),
   price: numeric("price", { scale: 4 }).notNull(),
+  imageUrl: text("image_url").notNull(),
   createdAt: timestamp("created_at", { precision: 6, withTimezone: true })
     .notNull()
     .defaultNow(),

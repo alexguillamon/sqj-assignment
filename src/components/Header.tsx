@@ -2,6 +2,7 @@
 import { Fragment } from "react";
 import { Popover, Transition } from "@headlessui/react";
 import { ShoppingBagIcon } from "@heroicons/react/24/outline";
+import Link from "next/link";
 
 const navigation = {
   categories: [
@@ -72,11 +73,11 @@ export default function Header() {
             <div className="flex h-16 items-center justify-between">
               {/* Logo */}
               <div className="flex flex-1">
-                <a href="#" className="flex flex-row">
+                <Link href="/" className="flex flex-row">
                   <span className="sr-only">SquadJobs Shop</span>
                   <img className="h-8 w-auto" src="/squadjobs-red.svg" alt="" />
                   <p className="mt-auto ml-0.5 font-bold italic">shop</p>
-                </a>
+                </Link>
               </div>
 
               {/* Flyout menus */}

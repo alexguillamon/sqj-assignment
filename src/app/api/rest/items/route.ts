@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { fromZodError } from "zod-validation-error";
-import { db, schema } from "~/backend/db";
+import { db, insertItemsSchema, items } from "~/backend/db";
 
 export async function GET(request: Request) {
   try {
@@ -25,10 +25,10 @@ export async function POST(request: Request) {
       throw new Error("Invalid JSON");
     });
     // Validate the data against the schema
-    const item = schema.insertItemsSchema.parse(data);
+    const item = insertItemsSchema.parse(data);
 
     // Insert the data into the database
-    const result = await db.insert(schema.items).values(data).returning();
+    const result = await db.insert(items).values(data).returning();
     // Return the inserted data
     return new Response(JSON.stringify(result));
   } catch (error) {

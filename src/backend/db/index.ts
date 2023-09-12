@@ -1,7 +1,9 @@
 import { neon, neonConfig } from "@neondatabase/serverless";
 import { drizzle } from "drizzle-orm/neon-http";
 
-export const schema = {};
+import * as items from "./schema/items";
+
+export const schema = { ...items };
 
 export * from "drizzle-orm";
 

@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 
 import "~/styles/globals.css";
 import Header from "~/components/Header";
+import Footer from "~/components/Footer";
 
 const fontSans = Inter({
   subsets: ["latin"],
@@ -26,13 +27,13 @@ export default function Layout(props: { children: React.ReactNode }) {
       <body className={["font-sans", fontSans.variable].join(" ")}>
         <Header />
         {props.children}
+        <Footer />
       </body>
     </html>
   );
 }
 
-// Todo: Add a footer
-// todo: add detail route
+// todo: add item images
 // todo: add admin route
 // todo: add items view
 // todo: add update item view

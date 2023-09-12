@@ -13,11 +13,11 @@ export default async function HomePage() {
         </h1>
         <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-10 md:max-w-7xl md:px-8">
           <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 md:grid-cols-3 lg:gap-x-8">
-            {items.map((product) => (
-              <div key={product.id} className="group relative">
+            {items.map((item) => (
+              <div key={item.id} className="group relative">
                 <div className="aspect-h-3 aspect-w-2 w-full overflow-hidden rounded-md bg-gray-200  group-hover:opacity-75 lg:h-96">
                   <img
-                    src={product.imageUrl}
+                    src={item.imageUrl}
                     alt={"Front of men's Basic Tee in black."}
                     className="h-full w-full object-cover object-center md:h-full md:w-full"
                   />
@@ -25,17 +25,21 @@ export default async function HomePage() {
                 <div className="mt-4 flex justify-between">
                   <div>
                     <h3 className="text-sm text-gray-700">
-                      <Link href={"/" + product.id}>
+                      <Link href={"/" + item.id}>
                         <span aria-hidden="true" className="absolute inset-0" />
-                        {product.name}
+                        {item.name}
                       </Link>
                     </h3>
                     <p className="mt-1 text-sm text-gray-500">
-                      {product.description}
+                      {item.description}
                     </p>
                   </div>
                   <p className="text-sm font-medium text-gray-900">
-                    ${parseFloat(product.price).toFixed(2)}
+                    $
+                    {parseFloat(item.price).toLocaleString("en-US", {
+                      minimumFractionDigits: 2,
+                      maximumFractionDigits: 2,
+                    })}
                   </p>
                 </div>
               </div>

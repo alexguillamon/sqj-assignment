@@ -1,4 +1,5 @@
 import { pgTable, serial, text, timestamp, numeric } from "drizzle-orm/pg-core";
+import { createInsertSchema, createSelectSchema } from "drizzle-zod";
 
 export const items = pgTable("items", {
   id: serial("id").primaryKey(),
@@ -9,4 +10,9 @@ export const items = pgTable("items", {
   createdAt: timestamp("created_at", { precision: 6, withTimezone: true })
     .notNull()
     .defaultNow(),
+});
+
+export const insertItemsSchema = createInsertSchema(items).omit({
+  id: true,
+  createdAt: true,
 });

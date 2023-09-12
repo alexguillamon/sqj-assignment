@@ -1,5 +1,5 @@
 import { GlobeAmericasIcon } from "@heroicons/react/24/outline";
-import { db, eq, items } from "../../backend/db";
+import { db, eq, items } from "~/backend/db";
 
 const breadcrumbs = [
   { id: 1, name: "Techie", href: "/" },
@@ -37,7 +37,6 @@ export default async function ProductPage({
   const item = await db.query.items.findFirst({
     where: eq(items.id, params.id),
   });
-  console.log(item);
 
   if (!item) {
     return <div>Item not found</div>;

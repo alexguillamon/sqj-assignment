@@ -14,9 +14,7 @@ export default async function HomePage() {
               <div key={product.id} className="group relative">
                 <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 md:aspect-none group-hover:opacity-75 md:h-90">
                   <img
-                    src={
-                      "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg"
-                    }
+                    src={product.imageUrl}
                     alt={"Front of men's Basic Tee in black."}
                     className="h-full w-full object-cover object-center md:h-full md:w-full"
                   />
@@ -34,7 +32,7 @@ export default async function HomePage() {
                     </p>
                   </div>
                   <p className="text-sm font-medium text-gray-900">
-                    {product.price}
+                    ${parseFloat(product.price).toFixed(2)}
                   </p>
                 </div>
               </div>

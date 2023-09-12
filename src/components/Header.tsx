@@ -57,7 +57,7 @@ const navigation = {
       ],
     },
   ],
-  other: [{ name: "Admin", href: "#" }],
+  other: [{ name: "Admin", href: "/admin" }],
 };
 
 function classNames(...classes: string[]) {

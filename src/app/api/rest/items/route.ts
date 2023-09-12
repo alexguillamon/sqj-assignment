@@ -30,7 +30,7 @@ export async function POST(request: Request) {
     // Insert the data into the database
     const result = await db.insert(items).values(item).returning();
     // Return the inserted data
-    return new Response(JSON.stringify({ data: result }));
+    return new Response(JSON.stringify({ data: result[0] }));
   } catch (error) {
     // Handle validation errors
     if (error instanceof z.ZodError) {

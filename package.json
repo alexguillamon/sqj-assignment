@@ -8,7 +8,8 @@
     "start": "pnpm with-env next start",
     "with-env": "dotenv -e .env --",
     "db:push": "drizzle-kit push:pg --config ./src/backend/db/drizzle.config.ts",
-    "db:migrate": "drizzle-kit generate:pg --config=./src/backend/db/drizzle.config.ts"
+    "db:migrate": "drizzle-kit generate:pg --config=./src/backend/db/drizzle.config.ts",
+    "db:studio": "drizzle-kit studio --config=./src/backend/db/drizzle.config.ts"
   },
   "dependencies": {
     "@neondatabase/serverless": "^0.6.0",
@@ -24,6 +25,7 @@
     "autoprefixer": "^10.4.15",
     "drizzle-orm": "^0.28.6",
     "next": "^13.4.19",
+    "pg": "^8.11.3",
     "postcss": "^8.4.29",
     "react": "18.2.0",
     "react-dom": "18.2.0",

@@ -1,10 +1,7 @@
 "use client";
 import { Fragment } from "react";
 import { Popover, Transition } from "@headlessui/react";
-import {
-  MagnifyingGlassIcon,
-  ShoppingBagIcon,
-} from "@heroicons/react/24/outline";
+import { ShoppingBagIcon } from "@heroicons/react/24/outline";
 
 const navigation = {
   categories: [
@@ -76,7 +73,7 @@ export default function Header() {
               {/* Logo */}
               <div className="flex flex-1">
                 <a href="#" className="flex flex-row">
-                  <span className="sr-only">Your Company</span>
+                  <span className="sr-only">SquadJobs Shop</span>
                   <img className="h-8 w-auto" src="/squadjobs-red.svg" alt="" />
                   <p className="mt-auto ml-0.5 font-bold italic">shop</p>
                 </a>
@@ -254,12 +251,6 @@ export default function Header() {
               </Popover.Group>
 
               <div className="flex flex-1 items-center justify-end">
-                {/* Search */}
-                <a href="#" className="p-2 text-gray-400 hover:text-gray-500">
-                  <span className="sr-only">Search</span>
-                  <MagnifyingGlassIcon className="h-6 w-6" aria-hidden="true" />
-                </a>
-
                 {/* Cart */}
                 <div className="ml-4 flow-root lg:ml-8">
                   <a href="#" className="group -m-2 flex items-center p-2">

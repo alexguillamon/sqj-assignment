@@ -72,6 +72,7 @@ To start the test suite on watch mode, run:
 ```bash
 pnpm test
 ```
+* Note: tests are run against a branch of the production database in order to have a consistent environment.
 
 ### Database
 

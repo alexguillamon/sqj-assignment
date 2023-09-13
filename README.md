@@ -37,7 +37,19 @@ This app is built using the following stack:
 
 ### Development
 
-To start the development server, run:
+First make sure you have docker installed and running. Then run the following command to start the database:
+
+```bash
+pnpm db:start
+```
+To apply migrations to the new db instance run:
+
+```bash
+pnpm db:push
+```
+This will apply migrations and seed the database with some sample data if the database is empty.
+
+Once that is complete, you can start the development server by running:
 
 ```bash
 pnpm dev
@@ -68,7 +80,6 @@ To start the test suite on watch mode, run:
 ```bash
 pnpm test
 ```
-* Note: tests are run against a branch of the production database in order to have a consistent environment.
 
 #### Database
 
@@ -80,11 +91,27 @@ This project is configured with Drizzle ORM for PostgreSQL database management. 
   pnpm db:migrate
   ```
 
+- To apply a migration, run:
+
+  ```bash
+  pnpm db:push
+  ```
 - To start Drizzle Studio (UI to explore and change the database data), run:
 
   ```bash
   pnpm db:studio
   ```
+- To start the database, run:
+
+  ```bash
+  pnpm db:start
+  ```
+- To stop the database, run:
+
+  ```bash
+  pnpm db:stop
+  ```
+
 
 ### Deployment
 

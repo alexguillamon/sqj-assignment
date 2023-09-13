@@ -41,7 +41,7 @@ export default function EditForm({ item }: { item?: Item }) {
     try {
       setStatus("loading");
       const res = await ky
-        .post("/api/rest/items", {
+        .post("/api/items", {
           json: { ...data, imageUrl },
         })
         .json<{ data: string }>();
@@ -65,7 +65,7 @@ export default function EditForm({ item }: { item?: Item }) {
     try {
       setStatus("loading");
       const res = await ky
-        .put(`/api/rest/items/${id}`, {
+        .put(`/api/items/${id}`, {
           json: { ...data, imageUrl },
         })
         .json<{ data: string }>();

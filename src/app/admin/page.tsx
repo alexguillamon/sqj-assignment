@@ -2,6 +2,8 @@ import Link from "next/link";
 import { db } from "~/backend/db";
 import DeleteButton from "../../components/DeleteButton";
 
+export const runtime = "edge";
+
 export default async function AdminPage() {
   const items = await db.query.items.findMany();
 

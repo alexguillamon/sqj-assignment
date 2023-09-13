@@ -1,6 +1,7 @@
 import EditForm from "~/components/EditForm";
-import { db, eq, items } from "~/backend/db";
 
-export default async function ItemEditPage() {
+export const runtime = "edge";
+
+export default async function ItemAddPage() {
   return <EditForm />;
 }

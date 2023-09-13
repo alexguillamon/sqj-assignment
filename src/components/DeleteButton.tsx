@@ -16,9 +16,7 @@ export default function DeleteButton({ id }: { id: number }) {
     return async function () {
       try {
         setStatus("loading");
-        const res = await ky
-          .delete(`/api/rest/items/${id}`)
-          .json<{ data: Item }>();
+        const res = await ky.delete(`/api/items/${id}`).json<{ data: Item }>();
         if (res.data) {
           setStatus("success");
           router.refresh();

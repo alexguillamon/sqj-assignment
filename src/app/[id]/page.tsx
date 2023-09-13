@@ -1,10 +1,7 @@
 import { GlobeAmericasIcon } from "@heroicons/react/24/outline";
 import { db, eq, items } from "~/backend/db";
 
-const breadcrumbs = [
-  { id: 1, name: "Techie", href: "/" },
-  { id: 2, name: "The Best Collection", href: "/" },
-];
+const breadcrumbs = [{ id: 1, name: "The Best Collection", href: "/" }];
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");

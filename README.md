@@ -4,41 +4,37 @@ The purpose of this project is to create a prototype for TechStore's online prod
 
 This project also showcases my skills using Typescript and NodeJs together with different tools and frameworks.
 
-## The Stack
+### The Stack
 
 This app is built using the following stack:
 
-- [Next.js](https://nextjs.org): framework powering React frontend and RESTful API.
-- [Drizzle](https://orm.drizzle.team/): lightweight typesafe ORM and migration engine. 
-- [Tailwind CSS](https://tailwindcss.com): CSS styling framework.
-- [Tailwind UI](https://tailwindui.com/): production ready styled components built with Tailwind CSS.
-- [Neon](https://neon.tech/): managed Postgres database.
-- [Uploadthing](https://uploadthing.com/): simple file upload storage.
+- Frontend & Backend: [Next.js](https://nextjs.org) for React frontend and RESTful API.
+- ORM: [Drizzle](https://orm.drizzle.team/) for ORM and migration engine. 
+- Styling: [Tailwind CSS](https://tailwindcss.com) and [Tailwind UI](https://tailwindui.com/) for UI styling.
+- Database: [Neon](https://neon.tech/) for serverless managed Postgres database.
+- File Storage: [Uploadthing](https://uploadthing.com/) for simple file upload storage.
 
-## Setup
 ### Requirements
 
 - Node.js 18.x
 - PostgreSQL (if developing fully local)
 - PNPM 
 
-### Installation
-This project uses `pnpm` as the package manager. If you don't already have `pnpm` you can install it using `npm` as shown below. For more info you can check their [docs](https://pnpm.io/installation).
+### Installation & Setup
+1. Installing PNPM: If you don't have `pnpm` installed, you can install it using `npm`. For more information, refer to the [official documentation](https://pnpm.io/installation).
 
-```
-npm install -g pnpm
-```
+    ```
+    npm install -g pnpm
+    ```
 
-Once `pnpm` has been installed you can go ahead and run:
 
-```
-pnpm i
-```
-This will install all dependencies.
+2. Installing Dependencies: Navigate to the project directory and run:
 
-The next step will be to set up your environment variables. This this project there is a `.env.example` file. This file has the needed declarations for the variables. 
+    ```
+    pnpm i
+    ```
+3. Environment Variables: Copy .env.example to a new file called .env and populate it with the necessary credentials and secrets.
 
-Copy this file and rename the copy to `.env`. Once this is completed use your company credentials and retreive the secrets for each of those.
 ### Development
 
 To start the development server, run:
@@ -47,9 +43,9 @@ To start the development server, run:
 pnpm dev
 ```
 
-## Scripts
+### Scripts
 
-### Build
+#### Build
 
 To get a production build of the project, run:
 
@@ -57,7 +53,7 @@ To get a production build of the project, run:
 pnpm build
 ```
 
-### Start
+#### Start
 
 To start the built project, run:
 
@@ -65,7 +61,7 @@ To start the built project, run:
 pnpm start
 ```
 
-### Test
+#### Test
 
 To start the test suite on watch mode, run:
 
@@ -74,7 +70,7 @@ pnpm test
 ```
 * Note: tests are run against a branch of the production database in order to have a consistent environment.
 
-### Database
+#### Database
 
 This project is configured with Drizzle ORM for PostgreSQL database management. You can use the following commands for database operations:
 
@@ -90,7 +86,7 @@ This project is configured with Drizzle ORM for PostgreSQL database management. 
   pnpm db:studio
   ```
 
-## Deployment
+### Deployment
 
 This project is deployed on [Vercel](https://vercel.com).
 

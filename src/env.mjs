@@ -24,9 +24,7 @@ export const env = createEnv({
    * Specify your client-side environment variables schema here.
    * For them to be exposed to the client, prefix them with `NEXT_PUBLIC_`.
    */
-  client: {
-    // NEXT_PUBLIC_CLIENTVAR: z.string(),
-  },
+  client: {},
   /**
    * Destructure all variables from `process.env` to make sure they aren't tree-shaken away.
    */
@@ -38,7 +36,6 @@ export const env = createEnv({
     DATABASE_URL_TEST: process.env.DATABASE_URL_TEST,
     UPLOADTHING_SECRET: process.env.UPLOADTHING_SECRET,
     UPLOADTHING_APP_ID: process.env.UPLOADTHING_APP_ID,
-    // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
   },
   skipValidation:
     !!process.env.CI ||

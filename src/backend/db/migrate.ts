@@ -6,10 +6,10 @@ import * as items from "./schema/items";
 import { seed } from "./seed";
 
 // Use this when running locally
-// const dbUrl = process.env.DB_URL_LOCAL;
+const dbUrl = process.env.DB_URL_LOCAL;
 
 // Use this when running on production
-const dbUrl = process.env.DB_URL_PROD;
+// const dbUrl = process.env.DB_URL_PROD;
 
 const pool = new Pool({
   connectionString: dbUrl,
@@ -25,10 +25,14 @@ async function main() {
 
   console.log("Database migrated successfully!");
 
-  // Uncomment this to seed the database
-  await seed(db);
-
-  process.exit(0);
+  const items = (await db.select().from(schema.items)).length;
+  if (items > 0) {
+    console.log("Database already seeded!");
+    process.exit(0);
+  } else {
+    await seed(db);
+    process.exit(0);
+  }
 }
 
 main().catch((err) => {

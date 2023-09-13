@@ -14,9 +14,8 @@ export const env = createEnv({
    * built with invalid env vars.
    */
   server: {
-    DATABASE_URL: z.string().url(),
-    DATABASE_URL_TEST: z.string().url(),
-    NODE_ENV: z.enum(["development", "test", "production"]),
+    DB_URL_PROD: z.string().url(),
+    DB_URL_LOCAL: z.string().url(),
     UPLOADTHING_SECRET: z.string(),
     UPLOADTHING_APP_ID: z.string(),
   },
@@ -31,9 +30,8 @@ export const env = createEnv({
   runtimeEnv: {
     VERCEL_URL: process.env.VERCEL_URL,
     PORT: process.env.PORT,
-    DATABASE_URL: process.env.DATABASE_URL,
-    NODE_ENV: process.env.NODE_ENV,
-    DATABASE_URL_TEST: process.env.DATABASE_URL_TEST,
+    DB_URL_PROD: process.env.DB_URL_PROD,
+    DB_URL_LOCAL: process.env.DB_URL_LOCAL,
     UPLOADTHING_SECRET: process.env.UPLOADTHING_SECRET,
     UPLOADTHING_APP_ID: process.env.UPLOADTHING_APP_ID,
   },

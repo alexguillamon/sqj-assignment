@@ -65,6 +65,14 @@ To start the built project, run:
 pnpm start
 ```
 
+### Test
+
+To start the test suite on watch mode, run:
+
+```bash
+pnpm test
+```
+
 ### Database
 
 This project is configured with Drizzle ORM for PostgreSQL database management. You can use the following commands for database operations:

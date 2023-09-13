@@ -26,7 +26,7 @@ jest.mock("next/cache", () => ({
 describe("/api/items", () => {
   describe("GET handler", () => {
     test("should return a list with all products", async () => {
-      // const itemsCount = await db.;
+      const itemsCount = (await db.select().from(items)).length;
 
       const { req } = createMocks({
         method: "GET",
@@ -38,7 +38,7 @@ describe("/api/items", () => {
 
       expect(response.status).toBe(200);
       expect(parsedResponse).toHaveProperty("data");
-      expect(parsedResponse.data).toHaveLength(5);
+      expect(parsedResponse.data).toHaveLength(itemsCount);
     });
   });
 
@@ -108,19 +108,42 @@ describe("/api/items", () => {
 });
 
 describe("/api/items/:id", () => {
+  let item: Item;
+  beforeEach(async () => {
+    const itemArr = await db
+      .insert(items)
+      .values({
+        name: "test name",
+        price: "333",
+        description: "test description",
+        imageUrl: "image url",
+      })
+      .returning();
+
+    if (!itemArr[0]) {
+      throw new Error("Could not insert item");
+    }
+
+    item = itemArr[0];
+  });
+
+  afterEach(async () => {
+    await db.delete(items).where(eq(items.id, item.id));
+  });
+
   describe("GET handler", () => {
     test("should return the specified item", async () => {
       const { req } = createMocks({
         method: "GET",
       });
 
-      const response = await getById(req, { params: { id: 1 } });
+      const response = await getById(req, { params: { id: item.id } });
 
       const parsedResponse = await response.json();
 
       expect(response.status).toBe(200);
       expect(parsedResponse).toHaveProperty("data");
-      expect(parsedResponse.data).toHaveProperty("id", 1);
+      expect(parsedResponse.data).toHaveProperty("id", item.id);
     });
 
     test("should return a 404 if item doesn't exist", async () => {
@@ -137,31 +160,8 @@ describe("/api/items/:id", () => {
   });
 
   describe("PUT handler", () => {
-    let item: Item;
-    beforeAll(async () => {
-      const itemArr = await db
-        .insert(items)
-        .values({
-          name: "test name",
-          price: "333",
-          description: "test description",
-          imageUrl: "image url",
-        })
-        .returning();
-
-      if (!itemArr[0]) {
-        throw new Error("Could not insert item");
-      }
-
-      item = itemArr[0];
-    });
-
-    afterAll(async () => {
-      await db.delete(items).where(eq(items.id, item.id));
-    });
-
     test("should insert data for specified item and return 200", async () => {
-      const { req, res } = customCreateMocks({
+      const { req } = customCreateMocks({
         method: "PUT",
         body: {
           name: "test name",
@@ -221,29 +221,6 @@ describe("/api/items/:id", () => {
   });
 
   describe("DELETE handler", () => {
-    let item: Item;
-    beforeAll(async () => {
-      const itemArr = await db
-        .insert(items)
-        .values({
-          name: "test name",
-          price: "333",
-          description: "test description",
-          imageUrl: "image url",
-        })
-        .returning();
-
-      if (!itemArr[0]) {
-        throw new Error("Could not insert item");
-      }
-
-      item = itemArr[0];
-    });
-
-    afterAll(async () => {
-      await db.delete(items).where(eq(items.id, item.id));
-    });
-
     test("should delete the specified item return 200", async () => {
       const { req } = customCreateMocks({
         method: "DELETE",
@@ -272,8 +249,6 @@ describe("/api/items/:id", () => {
       });
 
       const response = await remove(req, { params: { id: 9999999 } });
-
-      const parsedResponse = await response.json();
 
       expect(response.status).toBe(404);
     });

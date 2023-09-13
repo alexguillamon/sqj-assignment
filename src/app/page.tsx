@@ -1,8 +1,6 @@
 import Link from "next/link";
 import { db } from "~/backend/db";
 
-export const runtime = "edge";
-
 export default async function HomePage() {
   const items = await db.query.items.findMany();
   return (

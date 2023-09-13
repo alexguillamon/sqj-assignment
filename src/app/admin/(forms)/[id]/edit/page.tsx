@@ -1,8 +1,6 @@
 import EditForm from "~/components/EditForm";
 import { db, eq, items } from "~/backend/db";
 
-export const runtime = "edge";
-
 export default async function ItemEditPage({
   params,
 }: {
@@ -13,7 +11,7 @@ export default async function ItemEditPage({
   });
 
   if (!item) {
-    return <div>Item not found</div>;
+    return <div className="mx-auto text-center">Item not found</div>;
   }
   return <EditForm item={item} />;
 }

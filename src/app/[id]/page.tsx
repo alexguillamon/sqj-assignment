@@ -1,8 +1,6 @@
 import { GlobeAmericasIcon } from "@heroicons/react/24/outline";
 import { db, eq, items } from "~/backend/db";
 
-export const runtime = "edge";
-
 const breadcrumbs = [
   { id: 1, name: "Techie", href: "/" },
   { id: 2, name: "The Best Collection", href: "/" },
@@ -22,7 +20,7 @@ export default async function ProductPage({
   });
 
   if (!item) {
-    return <div>Item not found</div>;
+    return <div className="mx-auto text-center">Item not found</div>;
   }
   return (
     <div className="bg-white">

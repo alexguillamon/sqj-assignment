@@ -51,7 +51,7 @@ export default function EditForm({ item }: { item?: Item }) {
       if (res.data) {
         setStatus("success");
 
-        state$.items.push(res.data);
+        state$.items.set([...state$.items.get(), res.data]);
 
         router.push("/admin");
         router.refresh();

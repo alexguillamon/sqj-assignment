@@ -28,9 +28,9 @@ export default function Header() {
                 <Link href="/" className="flex flex-row">
                   <span className="sr-only">SquadJobs Shop</span>
                   <Image
-                    className="h-8 w-auto"
-                    width={500}
-                    height={200}
+                    className="w-32  h-auto md:w-44"
+                    width={300}
+                    height={100}
                     src="/squadjobs-red.svg"
                     alt="SquadJobs Shop Logo"
                   />

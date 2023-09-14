@@ -177,7 +177,7 @@ export default function EditForm({ item }: { item?: Item }) {
                 <img
                   src={imageUrl}
                   alt={"Front of men's Basic Tee in black."}
-                  className="h-full w-full object-cover object-center md:h-60 md:w-auto"
+                  className="h-auto w-80 object-cover object-center md:h-60 md:w-auto"
                 />
               )}
 

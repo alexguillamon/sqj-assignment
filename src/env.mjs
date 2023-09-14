@@ -18,6 +18,7 @@ export const env = createEnv({
     DB_URL_LOCAL: z.string().url(),
     UPLOADTHING_SECRET: z.string(),
     UPLOADTHING_APP_ID: z.string(),
+    ENVIRONMENT: z.enum(["development", "production", "test"]),
   },
   /**
    * Specify your client-side environment variables schema here.
@@ -34,6 +35,7 @@ export const env = createEnv({
     DB_URL_LOCAL: process.env.DB_URL_LOCAL,
     UPLOADTHING_SECRET: process.env.UPLOADTHING_SECRET,
     UPLOADTHING_APP_ID: process.env.UPLOADTHING_APP_ID,
+    ENVIRONMENT: process.env.NODE_ENV,
   },
   skipValidation:
     !!process.env.CI ||

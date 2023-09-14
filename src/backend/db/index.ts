@@ -4,9 +4,10 @@ import "dotenv/config";
 
 import * as items from "./schema/items";
 
-const dbUrl = !process.env.VERCEL_URL
-  ? process.env.DB_URL_LOCAL
-  : process.env.DB_URL_PROD;
+const dbUrl =
+  process.env.ENVIRONMENT === "development"
+    ? process.env.DB_URL_LOCAL
+    : process.env.DB_URL_PROD;
 
 const pool = new Pool({
   connectionString: dbUrl,

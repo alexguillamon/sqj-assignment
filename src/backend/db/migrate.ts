@@ -5,11 +5,10 @@ import "dotenv/config";
 import * as items from "./schema/items";
 import { seed } from "./seed";
 
-// Use this when running locally
-const dbUrl = process.env.DB_URL_LOCAL;
-
-// Use this when running on production
-// const dbUrl = process.env.DB_URL_PROD;
+const dbUrl =
+  process.env.ENVIRONMENT === "development"
+    ? process.env.DB_URL_LOCAL
+    : process.env.DB_URL_PROD;
 
 const pool = new Pool({
   connectionString: dbUrl,

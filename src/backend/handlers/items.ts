@@ -61,6 +61,8 @@ export async function create(request: Request) {
     const result = await db.insert(items).values(item).returning();
     // Return the inserted data
     revalidatePath("/admin");
+    revalidatePath("/");
+
     return new Response(JSON.stringify({ data: result[0] }));
   } catch (error) {
     // Handle validation errors
@@ -114,6 +116,8 @@ export async function modify(
 
     if (result.length > 0) {
       revalidatePath("/admin");
+      revalidatePath("/");
+
       return new Response(JSON.stringify({ data: result[0] }));
     } else {
       return new Response(JSON.stringify({ message: "Item not found" }), {
@@ -162,6 +166,7 @@ export async function remove(
 
     if (result.length > 0) {
       revalidatePath("/admin");
+      revalidatePath("/");
 
       return new Response(
         JSON.stringify({ message: "success", data: result[0] })

@@ -8,13 +8,15 @@ export default async function ProductGrid({ items }: { items: Item[] }) {
       {items.map((item) => (
         <div key={item.id} className="group relative">
           <div className="aspect-h-3 aspect-w-2 w-full overflow-hidden rounded-md bg-gray-200  group-hover:opacity-75 lg:h-96">
-            <Image
-              src={item.imageUrl}
-              alt={item.name}
-              height={500}
-              width={350}
-              className="h-full w-full object-cover object-center md:h-full md:w-full"
-            />
+            <Link href={"/" + item.id}>
+              <Image
+                src={item.imageUrl}
+                alt={item.name}
+                height={500}
+                width={350}
+                className="h-full w-full object-cover object-center md:h-full md:w-full"
+              />
+            </Link>
           </div>
           <div className="mt-4 flex justify-between relative w-full">
             <div className="relative max-w-[75%]">

@@ -56,25 +56,26 @@ export default function ItemsTable() {
             <div className="h-2 bg-gray-300 rounded-full dark:bg-gray-500 w-12"></div>
           </div>
 
-          {Array(5)
-            .fill(0)
-            .map(() => (
-              <div className="px-3 h-12 flex items-center justify-between">
-                <div>
-                  <div className="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-300"></div>
-                </div>
-                <div>
-                  <div className="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-300"></div>
-                </div>
-                <div>
-                  <div className="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-300"></div>
-                </div>
-                <div>
-                  <div className="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-300"></div>
-                </div>
-                <div className="h-2.5 bg-gray-300 rounded-full dark:bg-gray-300 w-12"></div>
+          {[0, 1, 2, 3, 4, 5].map((key) => (
+            <div
+              key={key}
+              className="px-3 h-12 flex items-center justify-between"
+            >
+              <div>
+                <div className="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-300"></div>
               </div>
-            ))}
+              <div>
+                <div className="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-300"></div>
+              </div>
+              <div>
+                <div className="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-300"></div>
+              </div>
+              <div>
+                <div className="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-300"></div>
+              </div>
+              <div className="h-2.5 bg-gray-300 rounded-full dark:bg-gray-300 w-12"></div>
+            </div>
+          ))}
 
           <span className="sr-only">Loading...</span>
         </div>

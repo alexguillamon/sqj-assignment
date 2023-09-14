@@ -7,12 +7,8 @@ import DeleteModal from "./DeleteModal";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { state$ } from "../app/admin/adminState";
 
-type StatusType = "idle" | "loading" | "error" | "success";
-
 export default function DeleteButton({ id }: { id: number }) {
-  const [status, setStatus] = useState<StatusType>("idle");
   const [open, setOpen] = useState(false);
-  const router = useRouter();
   const queryClient = useQueryClient();
 
   const deleteItem = useMutation({
@@ -22,7 +18,7 @@ export default function DeleteButton({ id }: { id: number }) {
       // Invalidate and refetch
       queryClient.invalidateQueries({ queryKey: ["items"] });
 
-      state$.items.find((item) => item.get().id === id)?.delete();
+      state$.items.set(state$.items.get().filter((item) => item.id !== id));
       setOpen(false);
     },
   });

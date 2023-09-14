@@ -17,6 +17,7 @@
   "dependencies": {
     "@headlessui/react": "^1.7.17",
     "@heroicons/react": "^2.0.18",
+    "@legendapp/state": "^1.11.1",
     "@neondatabase/serverless": "^0.6.0",
     "@t3-oss/env-nextjs": "^0.6.1",
     "@tailwindcss/aspect-ratio": "^0.4.2",

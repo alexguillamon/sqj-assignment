@@ -4,7 +4,6 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import type { Item } from "~/backend/db";
 import DeleteModal from "./DeleteModal";
-import { set } from "react-hook-form";
 
 type StatusType = "idle" | "loading" | "error" | "success";
 
@@ -29,6 +28,7 @@ export default function DeleteButton({ id }: { id: number }) {
           const errorJson = await error.response.json();
           console.log(errorJson);
         }
+        setOpen(false);
       }
     };
   }

@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import { z } from "zod";
 import { UploadButton, UploadDropzone } from "~/utils/uploadthing";
 import Image from "next/image";
+import { state$ } from "../app/admin/adminState";
 
 type StatusType = "idle" | "loading" | "error" | "success";
 
@@ -45,10 +46,12 @@ export default function EditForm({ item }: { item?: Item }) {
         .post("/api/items", {
           json: { ...data, imageUrl },
         })
-        .json<{ data: string }>();
+        .json<{ data: Item }>();
 
       if (res.data) {
         setStatus("success");
+
+        state$.items.push(res.data);
 
         router.push("/admin");
         router.refresh();

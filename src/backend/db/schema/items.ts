@@ -19,3 +19,4 @@ export const insertItemsSchema = createInsertSchema(items).omit({
 
 export const selectItemsSchema = createSelectSchema(items);
 export type Item = typeof items.$inferSelect;
+export type NewItem = typeof items.$inferInsert;

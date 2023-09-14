@@ -4,6 +4,8 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import type { Item } from "~/backend/db";
 import DeleteModal from "./DeleteModal";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { state$ } from "../app/admin/adminState";
 
 type StatusType = "idle" | "loading" | "error" | "success";
 
@@ -11,32 +13,25 @@ export default function DeleteButton({ id }: { id: number }) {
   const [status, setStatus] = useState<StatusType>("idle");
   const [open, setOpen] = useState(false);
   const router = useRouter();
+  const queryClient = useQueryClient();
 
-  function deleteItem(id: number) {
-    return async function () {
-      try {
-        setStatus("loading");
-        const res = await ky.delete(`/api/items/${id}`).json<{ data: Item }>();
-        if (res.data) {
-          setStatus("success");
-          router.refresh();
-          setOpen(false);
-        }
-      } catch (error: any) {
-        setStatus("error");
-        if (error.name === "HTTPError") {
-          const errorJson = await error.response.json();
-          console.log(errorJson);
-        }
-        setOpen(false);
-      }
-    };
-  }
+  const deleteItem = useMutation({
+    mutationFn: (data: number) =>
+      ky.delete(`/api/items/${id}`).json<{ data: Item }>(),
+    onSuccess: (res) => {
+      // Invalidate and refetch
+      queryClient.invalidateQueries({ queryKey: ["items"] });
+
+      state$.items.find((item) => item.get().id === id)?.delete();
+      setOpen(false);
+    },
+  });
+
   return (
     <>
       <DeleteModal
         open={open}
-        onDelete={deleteItem(id)}
+        onDelete={() => deleteItem.mutate(id)}
         onClose={() => setOpen(false)}
       />
       <p

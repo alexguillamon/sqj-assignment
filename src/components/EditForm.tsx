@@ -43,17 +43,32 @@ export default function EditForm({ item }: { item?: Item }) {
         .json<{ data: Item }>(),
     onSuccess: (res) => {
       // Invalidate and refetch
-      // queryClient.invalidateQueries({ queryKey: ["items"] });
+      queryClient.invalidateQueries({ queryKey: ["items"] });
       state$.items.set([...state$.items.get(), res.data]);
-      setTimeout(() => {
-        router.push("/admin");
-      }, 300);
+      router.push("/admin");
+    },
+  });
+
+  const putItem = useMutation({
+    mutationFn: ({ id, data }: { id: number; data: Inputs }) =>
+      ky
+        .put(`/api/items/${id}`, {
+          json: { ...data, imageUrl },
+        })
+        .json<{ data: Item }>(),
+    onSuccess: (res) => {
+      // Invalidate and refetch
+      queryClient.invalidateQueries({ queryKey: ["items"] });
+      state$.items
+        .find((itemObs) => itemObs.get().id === res.data.id)
+        ?.set({ ...res.data });
+      router.push("/admin");
     },
   });
 
   function onSubmit(data: Inputs) {
     if (item) {
-      putItem(item.id, data);
+      putItem.mutate({ id: item.id, data });
     } else {
       postItem.mutate(data);
     }
@@ -86,28 +101,28 @@ export default function EditForm({ item }: { item?: Item }) {
   //   }
   // }
 
-  async function putItem(id: number, data: Inputs) {
-    try {
-      setStatus("loading");
-      const res = await ky
-        .put(`/api/items/${id}`, {
-          json: { ...data, imageUrl },
-        })
-        .json<{ data: string }>();
+  // async function putItem(id: number, data: Inputs) {
+  //   try {
+  //     setStatus("loading");
+  //     const res = await ky
+  //       .put(`/api/items/${id}`, {
+  //         json: { ...data, imageUrl },
+  //       })
+  //       .json<{ data: string }>();
 
-      if (res.data) {
-        setStatus("success");
+  //     if (res.data) {
+  //       setStatus("success");
 
-        router.push("/admin");
-      }
-    } catch (error: any) {
-      setStatus("error");
-      if (error.name === "HTTPError") {
-        const errorJson = await error.response.json();
-        console.log(errorJson);
-      }
-    }
-  }
+  //       router.push("/admin");
+  //     }
+  //   } catch (error: any) {
+  //     setStatus("error");
+  //     if (error.name === "HTTPError") {
+  //       const errorJson = await error.response.json();
+  //       console.log(errorJson);
+  //     }
+  //   }
+  // }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>

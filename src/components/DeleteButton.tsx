@@ -1,6 +1,5 @@
 "use client";
 import ky from "ky";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 import type { Item } from "~/backend/db";
 import DeleteModal from "./DeleteModal";

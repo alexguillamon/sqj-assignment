@@ -79,7 +79,6 @@ export default function EditForm({ item }: { item?: Item }) {
         console.log(res.data);
 
         router.push("/admin");
-        router.refresh();
       }
     } catch (error: any) {
       setStatus("error");

@@ -23,19 +23,22 @@ export default async function HomePage() {
                     className="h-full w-full object-cover object-center md:h-full md:w-full"
                   />
                 </div>
-                <div className="mt-4 flex justify-between">
-                  <div>
-                    <h3 className="text-sm text-gray-700">
+                <div className="mt-4 flex justify-between relative w-full">
+                  <div className="relative max-w-[75%]">
+                    <h3 className="text-sm text-gray-700 truncate ">
                       <Link href={"/" + item.id}>
-                        <span aria-hidden="true" className="absolute inset-0" />
+                        {/* <span
+                          aria-hidden="true"
+                          className="absolute inset-0 "
+                        /> */}
                         {item.name}
                       </Link>
                     </h3>
-                    <p className="mt-1 text-sm text-gray-500">
+                    <p className="mt-1 text-sm text-gray-500 truncate">
                       {item.description}
                     </p>
                   </div>
-                  <p className="text-sm font-medium text-gray-900">
+                  <p className="text-sm font-medium text-gray-900 truncate min-w-[25%] text-end">
                     $
                     {parseFloat(item.price).toLocaleString("en-US", {
                       minimumFractionDigits: 2,

@@ -1,13 +1,14 @@
 "use client";
-import { set, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { useState } from "react";
-import { PhotoIcon } from "@heroicons/react/24/solid";
 import { Item } from "~/backend/db";
 import ky from "ky";
 import { useRouter } from "next/navigation";
 import { z } from "zod";
-import { UploadButton, UploadDropzone } from "~/utils/uploadthing";
+import { UploadDropzone } from "~/utils/uploadthing";
 import Image from "next/image";
+import { state$ } from "../app/admin/adminState";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 type StatusType = "idle" | "loading" | "error" | "success";
 
@@ -30,60 +31,46 @@ export default function EditForm({ item }: { item?: Item }) {
     formState: { errors },
   } = useForm<Inputs>();
 
-  function onSubmit(data: Inputs) {
-    if (item) {
-      putItem(item.id, data);
-    } else {
-      postItem(data);
-    }
-  }
+  const queryClient = useQueryClient();
 
-  async function postItem(data: Inputs) {
-    try {
-      setStatus("loading");
-      const res = await ky
+  // Mutations
+  const postItem = useMutation({
+    mutationFn: (data: Inputs) =>
+      ky
         .post("/api/items", {
           json: { ...data, imageUrl },
         })
-        .json<{ data: string }>();
+        .json<{ data: Item }>(),
+    onSuccess: (res) => {
+      // Invalidate and refetch
+      queryClient.invalidateQueries({ queryKey: ["items"] });
+      state$.items.set([...state$.items.get(), res.data]);
+      router.push("/admin");
+    },
+  });
 
-      if (res.data) {
-        setStatus("success");
-
-        router.push("/admin");
-        router.refresh();
-      }
-    } catch (error: any) {
-      setStatus("error");
-      if (error.name === "HTTPError") {
-        const errorJson = await error.response.json();
-        console.log(errorJson);
-      }
-    }
-  }
-
-  async function putItem(id: number, data: Inputs) {
-    try {
-      setStatus("loading");
-      const res = await ky
+  const putItem = useMutation({
+    mutationFn: ({ id, data }: { id: number; data: Inputs }) =>
+      ky
         .put(`/api/items/${id}`, {
           json: { ...data, imageUrl },
         })
-        .json<{ data: string }>();
+        .json<{ data: Item }>(),
+    onSuccess: (res) => {
+      // Invalidate and refetch
+      queryClient.invalidateQueries({ queryKey: ["items"] });
+      state$.items
+        .find((itemObs) => itemObs.get().id === res.data.id)
+        ?.set({ ...res.data });
+      router.push("/admin");
+    },
+  });
 
-      if (res.data) {
-        setStatus("success");
-        console.log(res.data);
-
-        router.push("/admin");
-        router.refresh();
-      }
-    } catch (error: any) {
-      setStatus("error");
-      if (error.name === "HTTPError") {
-        const errorJson = await error.response.json();
-        console.log(errorJson);
-      }
+  function onSubmit(data: Inputs) {
+    if (item) {
+      putItem.mutate({ id: item.id, data });
+    } else {
+      postItem.mutate(data);
     }
   }
 
@@ -127,9 +114,11 @@ export default function EditForm({ item }: { item?: Item }) {
                   <span className="text-gray-500 sm:text-sm">$</span>
                 </div>
                 <input
-                  type="text"
+                  type="number"
                   id="price"
-                  {...register("price", { required: true })}
+                  {...register("price", {
+                    required: true,
+                  })}
                   className="block w-full rounded-md border-0 py-1.5 pl-7 pr-12 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary-600 sm:text-sm sm:leading-6"
                   placeholder="0.00"
                   defaultValue={item?.price ?? ""}

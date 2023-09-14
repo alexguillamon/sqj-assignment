@@ -5,6 +5,7 @@ import "@uploadthing/react/styles.css";
 import "~/styles/globals.css";
 import Header from "~/components/Header";
 import Footer from "~/components/Footer";
+import TanstackProvider from "../utils/TanstackProvider";
 
 const fontSans = Inter({
   subsets: ["latin"],
@@ -26,9 +27,11 @@ export default function Layout(props: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body className={["font-sans", fontSans.variable].join(" ")}>
-        <Header />
-        {props.children}
-        <Footer />
+        <TanstackProvider>
+          <Header />
+          {props.children}
+          <Footer />
+        </TanstackProvider>
       </body>
     </html>
   );

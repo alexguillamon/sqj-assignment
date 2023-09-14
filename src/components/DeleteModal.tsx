@@ -55,7 +55,7 @@ export default function DeleteModal({
                     </Dialog.Title>
                     <div className="mt-2">
                       <p className="text-sm text-gray-500">
-                        Are you sure you want to delete this itemt? All the data
+                        Are you sure you want to delete this item? All the data
                         will be permanently removed from our servers. This
                         action cannot be undone.
                       </p>

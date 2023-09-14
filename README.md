@@ -21,23 +21,23 @@ This app is built using the following stack:
 - PNPM 
 
 ### Installation & Setup
-1. Installing PNPM: If you don't have `pnpm` installed, you can install it using `npm`. For more information, refer to the [official documentation](https://pnpm.io/installation).
+1. **Installing PNPM:** If you don't have `pnpm` installed, you can install it using `npm`. For more information, refer to the [official documentation](https://pnpm.io/installation).
 
     ```
     npm install -g pnpm
     ```
 
 
-2. Installing Dependencies: Navigate to the project directory and run:
+2. **Installing Dependencies:** Navigate to the project directory and run:
 
     ```
     pnpm i
     ```
-3. Environment Variables: Copy .env.example to a new file called .env and populate it with the necessary credentials and secrets.
+3. **Environment Variables:** Copy .env.example to a new file called .env and populate it with the necessary credentials and secrets.
 
 ### Development
 
-First make sure you have docker installed and running. Then run the following command to start the database:
+First make sure you have docker installed and running. Then use following command to start the database:
 
 ```bash
 pnpm db:start

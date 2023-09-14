@@ -29,8 +29,8 @@ export default function Header() {
                   <span className="sr-only">SquadJobs Shop</span>
                   <Image
                     className="h-8 w-auto"
-                    width={150}
-                    height={150}
+                    width={500}
+                    height={200}
                     src="/squadjobs-red.svg"
                     alt="SquadJobs Shop Logo"
                   />

@@ -2,7 +2,6 @@
 import Link from "next/link";
 import DeleteButton from "~/components/DeleteButton";
 import { Item } from "~/backend/db";
-
 import { state$ } from "~/app/admin/adminState";
 import { useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
@@ -14,7 +13,6 @@ export default function ItemsTable() {
     queryKey: ["items"],
     queryFn: () => ky.get("/api/items").json<{ data: Item[] }>(),
   });
-
   const fakeLoading = useObservable(false);
 
   const isFakeLoading = fakeLoading.use();

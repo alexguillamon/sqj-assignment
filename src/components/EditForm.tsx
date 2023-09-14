@@ -54,7 +54,6 @@ export default function EditForm({ item }: { item?: Item }) {
         state$.items.set([...state$.items.get(), res.data]);
 
         router.push("/admin");
-        router.refresh();
       }
     } catch (error: any) {
       setStatus("error");
@@ -76,7 +75,6 @@ export default function EditForm({ item }: { item?: Item }) {
 
       if (res.data) {
         setStatus("success");
-        console.log(res.data);
 
         router.push("/admin");
       }

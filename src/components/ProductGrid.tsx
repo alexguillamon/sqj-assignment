@@ -20,10 +20,7 @@ export default async function ProductGrid({ items }: { items: Item[] }) {
             <div className="relative max-w-[75%]">
               <h3 className="text-sm text-gray-700 truncate ">
                 <Link href={"/" + item.id}>
-                  {/* <span
-                          aria-hidden="true"
-                          className="absolute inset-0 "
-                        /> */}
+                  <span aria-hidden="true" className="absolute inset-0 " />
                   {item.name}
                 </Link>
               </h3>

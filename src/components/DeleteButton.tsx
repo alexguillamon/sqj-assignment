@@ -20,7 +20,7 @@ export default function DeleteButton({ id }: { id: number }) {
       ky.delete(`/api/items/${id}`).json<{ data: Item }>(),
     onSuccess: (res) => {
       // Invalidate and refetch
-      // queryClient.invalidateQueries({ queryKey: ["items"] });
+      queryClient.invalidateQueries({ queryKey: ["items"] });
 
       state$.items.find((item) => item.get().id === id)?.delete();
       setOpen(false);

@@ -43,7 +43,7 @@ export default function EditForm({ item }: { item?: Item }) {
         .json<{ data: Item }>(),
     onSuccess: (res) => {
       // Invalidate and refetch
-      // queryClient.invalidateQueries({ queryKey: ["items"] });
+      queryClient.invalidateQueries({ queryKey: ["items"] });
       state$.items.set([...state$.items.get(), res.data]);
       router.push("/admin");
     },
@@ -58,7 +58,7 @@ export default function EditForm({ item }: { item?: Item }) {
         .json<{ data: Item }>(),
     onSuccess: (res) => {
       // Invalidate and refetch
-      // queryClient.invalidateQueries({ queryKey: ["items"] });
+      queryClient.invalidateQueries({ queryKey: ["items"] });
       state$.items
         .find((itemObs) => itemObs.get().id === res.data.id)
         ?.set({ ...res.data });

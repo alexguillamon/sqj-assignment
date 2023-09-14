@@ -3,8 +3,8 @@ import type { Config } from "drizzle-kit";
 
 dotenv.config();
 
-if (!process.env.DB_URL_LOCAL && !process.env.DB_URL_PROD) {
-  throw new Error("DATABASE_URL is not set");
+if (!process.env.DB_URL_PROD) {
+  throw new Error("DB_URL_PROD is not set");
 }
 
 export default {
@@ -14,7 +14,7 @@ export default {
   dbCredentials: {
     connectionString:
       process.env.ENVIRONMENT === "production"
-        ? process.env.DB_URL_PROD!
-        : process.env.DB_URL_LOCAL!,
+        ? process.env.DB_URL_PROD
+        : process.env.DB_URL_LOCAL ?? "",
   },
 } satisfies Config;

@@ -12,8 +12,9 @@ export default {
   schema: "./src/backend/db/schema",
   driver: "pg",
   dbCredentials: {
-    connectionString: process.env.VERCEL_URL
-      ? process.env.DB_URL_PROD!
-      : process.env.DB_URL_LOCAL!,
+    connectionString:
+      process.env.ENVIRONMENT === "production"
+        ? process.env.DB_URL_PROD!
+        : process.env.DB_URL_LOCAL!,
   },
 } satisfies Config;

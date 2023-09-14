@@ -5,9 +5,25 @@ import { Item } from "~/backend/db";
 
 import { state$ } from "~/app/admin/adminState";
 import { useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
+import ky from "ky";
 
 export default function ItemsTable() {
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["items"],
+    queryFn: () => ky.get("/api/items").json<{ data: Item[] }>(),
+  });
+
+  useEffect(() => {
+    if (data) {
+      state$.items.set(data.data);
+    }
+  }, [data]);
   const items = state$.items.use();
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="mt-8 flow-root">

@@ -8,6 +8,7 @@ import { z } from "zod";
 import { UploadDropzone } from "~/utils/uploadthing";
 import Image from "next/image";
 import { state$ } from "../app/admin/adminState";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 type StatusType = "idle" | "loading" | "error" | "success";
 
@@ -30,40 +31,58 @@ export default function EditForm({ item }: { item?: Item }) {
     formState: { errors },
   } = useForm<Inputs>();
 
+  const queryClient = useQueryClient();
+
+  // Mutations
+  const postItem = useMutation({
+    mutationFn: (data: Inputs) =>
+      ky
+        .post("/api/items", {
+          json: { ...data, imageUrl },
+        })
+        .json<{ data: Item }>(),
+    onSuccess: (res) => {
+      // Invalidate and refetch
+      queryClient.invalidateQueries({ queryKey: ["items"] });
+      state$.items.set([...state$.items.get(), res.data]);
+      router.push("/admin");
+    },
+  });
+
   function onSubmit(data: Inputs) {
     if (item) {
       putItem(item.id, data);
     } else {
-      postItem(data);
+      postItem.mutate(data);
     }
   }
 
-  async function postItem(data: Inputs) {
-    try {
-      setStatus("loading");
-      const res = await ky
-        .post("/api/items", {
-          json: { ...data, imageUrl },
-        })
-        .json<{ data: Item }>();
+  // async function postItem(data: Inputs) {
+  //   try {
+  //     setStatus("loading");
+  //     const res = await ky
+  //       .post("/api/items", {
+  //         json: { ...data, imageUrl },
+  //       })
+  //       .json<{ data: Item }>();
 
-      if (res.data) {
-        setStatus("success");
+  //     if (res.data) {
+  //       setStatus("success");
 
-        console.log(res.data);
+  //       console.log(res.data);
 
-        state$.items.set([...state$.items.get(), res.data]);
+  //       state$.items.set([...state$.items.get(), res.data]);
 
-        router.push("/admin");
-      }
-    } catch (error: any) {
-      setStatus("error");
-      if (error.name === "HTTPError") {
-        const errorJson = await error.response.json();
-        console.log(errorJson);
-      }
-    }
-  }
+  //       router.push("/admin");
+  //     }
+  //   } catch (error: any) {
+  //     setStatus("error");
+  //     if (error.name === "HTTPError") {
+  //       const errorJson = await error.response.json();
+  //       console.log(errorJson);
+  //     }
+  //   }
+  // }
 
   async function putItem(id: number, data: Inputs) {
     try {

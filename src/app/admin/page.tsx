@@ -1,12 +1,7 @@
 import Link from "next/link";
-import { db } from "~/backend/db";
-import DeleteButton from "../../components/DeleteButton";
 import ItemsTable from "../../components/ItemsTable";
-import Hydrate from "../../components/Hydrate";
 
 export default async function AdminPage() {
-  const items = await db.query.items.findMany();
-
   return (
     <div className="px-4 sm:px-6 max-w-7xl mx-auto lg:px-8 py-8">
       <div className="sm:flex sm:items-center">
@@ -26,7 +21,6 @@ export default async function AdminPage() {
           </Link>
         </div>
       </div>
-      <Hydrate initialItems={items} />
       <ItemsTable />
     </div>
   );

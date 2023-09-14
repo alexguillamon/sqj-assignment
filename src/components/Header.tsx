@@ -4,13 +4,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-const navigation = {
-  other: [
-    { name: "The Best Collection", href: "/" },
-    { name: "Admin", href: "/admin" },
-  ],
-};
-
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
@@ -40,20 +33,30 @@ export default function Header() {
 
               <div className="absolute inset-x-0 bottom-0 sm:static sm:flex-1 sm:self-stretch">
                 <div className="flex h-14 space-x-8 overflow-x-auto border-t px-4 pb-px sm:h-full sm:justify-center sm:overflow-visible sm:border-t-0 sm:pb-0">
-                  {navigation.other.map((item) => (
-                    <Link
-                      key={item.name}
-                      href={item.href}
-                      className={classNames(
-                        path === item.href
-                          ? "border-primary-600 text-primary-600"
-                          : "border-transparent text-gray-700 hover:text-gray-800",
-                        "relative -mb-px flex items-center border-b-2 pt-px text-sm font-medium transition-colors duration-200 ease-out"
-                      )}
-                    >
-                      {item.name}
-                    </Link>
-                  ))}
+                  <Link
+                    href={"/"}
+                    prefetch={false}
+                    className={classNames(
+                      path === "/"
+                        ? "border-primary-600 text-primary-600"
+                        : "border-transparent text-gray-700 hover:text-gray-800",
+                      "relative -mb-px flex items-center border-b-2 pt-px text-sm font-medium transition-colors duration-200 ease-out"
+                    )}
+                  >
+                    {"The Best Collection"}
+                  </Link>
+                  <Link
+                    href={"/admin"}
+                    prefetch={false}
+                    className={classNames(
+                      path === "/admin"
+                        ? "border-primary-600 text-primary-600"
+                        : "border-transparent text-gray-700 hover:text-gray-800",
+                      "relative -mb-px flex items-center border-b-2 pt-px text-sm font-medium transition-colors duration-200 ease-out"
+                    )}
+                  >
+                    {"Admin"}
+                  </Link>
                 </div>
               </div>
 

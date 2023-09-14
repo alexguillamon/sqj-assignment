@@ -45,7 +45,9 @@ export default function EditForm({ item }: { item?: Item }) {
       // Invalidate and refetch
       // queryClient.invalidateQueries({ queryKey: ["items"] });
       state$.items.set([...state$.items.get(), res.data]);
-      router.push("/admin");
+      setTimeout(() => {
+        router.push("/admin");
+      }, 300);
     },
   });
 

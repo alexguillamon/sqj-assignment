@@ -29,7 +29,7 @@ export default async function ProductPage({
                 <div className="flex items-center">
                   <a
                     href={breadcrumb.href}
-                    className="mr-4 text-sm font-medium text-gray-900"
+                    className="mr-4 text-sm font-medium text-gray-900 "
                   >
                     {breadcrumb.name}
                   </a>
@@ -46,17 +46,17 @@ export default async function ProductPage({
                 </div>
               </li>
             ))}
-            <li className="text-sm">{item.name}</li>
+            <li className="text-sm max-w-xs truncate">{item.name}</li>
           </ol>
         </nav>
         <div className="mx-auto mt-8 max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
           <div className="lg:grid lg:auto-rows-min lg:grid-cols-12 lg:gap-x-8">
             <div className="lg:col-span-5 lg:col-start-8">
               <div className="flex justify-between">
-                <h1 className="text-xl font-medium text-gray-900">
+                <h1 className="text-xl font-medium text-gray-900 max-w-xs truncate">
                   {item.name}
                 </h1>
-                <p className="text-xl font-medium text-gray-900">
+                <p className="text-xl font-medium text-gray-900 max-w-xs truncate">
                   $
                   {parseFloat(item.price).toLocaleString("en-US", {
                     minimumFractionDigits: 2,
@@ -82,7 +82,7 @@ export default async function ProductPage({
             <div className="lg:col-span-5">
               {/* Product details */}
               <div className="mt-6">
-                <div className="prose prose-sm mt-4 text-gray-500">
+                <div className="prose prose-sm mt-4 text-gray-500 ">
                   {item.description}
                 </div>
               </div>
@@ -106,8 +106,11 @@ export default async function ProductPage({
                 </div>
               </div>
 
-              <button className="mt-8 flex w-full items-center justify-center rounded-md border border-transparent bg-primary-600 px-8 py-3 text-base font-medium text-white hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2">
-                Add to cart
+              <button
+                disabled
+                className="mt-8 flex w-full items-center justify-center rounded-md border border-transparent bg-primary-600 px-8 py-3 text-base font-medium text-white hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 disabled:opacity-25 disabled:cursor-not-allowed disabled:hover:bg-primary-600"
+              >
+                Sold out
               </button>
 
               <section className="mt-10">

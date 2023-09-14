@@ -13,13 +13,13 @@ const fontSans = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "TechStore",
-  description: "TechStore's amazing tech store",
+  title: "SquadJobs Store",
+  description: "SquadJobs's amazing tech store",
   openGraph: {
-    title: "TechStore",
-    description: "TechStore's amazing tech store",
+    title: "TechSquadJobs Shop",
+    description: "SquadJobs's amazing tech store",
     url: "https://squadjobs.com/",
-    siteName: "TechStore",
+    siteName: "SquadJobs Shop",
   },
 };
 

@@ -69,19 +69,19 @@ export default function ItemsTable() {
               <tbody className="divide-y divide-gray-200 bg-white">
                 {items.map((item) => (
                   <tr key={item.id}>
-                    <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 truncate">
+                    <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium max-w-[10rem]  text-gray-900 sm:pl-6 truncate">
                       {item.name}
                     </td>
                     <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500 max-w-xs truncate">
                       {item.description}
                     </td>
-                    <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500 truncate">
+                    <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500 max-w-[8rem] truncate">
                       {item.price}
                     </td>
                     <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500 max-w-xs truncate ">
                       {item.imageUrl}
                     </td>
-                    <td className="flex flex-col sm:flex-row gap-x-3 relative whitespace-nowrap py-4 pr-4 text-right text-sm font-medium w-16">
+                    <td className="flex flex-col sm:flex-row gap-x-3 relative whitespace-nowrap py-4 pr-4 text-right sm:min-w-[6rem] text-sm font-medium w-16">
                       <Link
                         href={`/admin/${item.id}/edit`}
                         className="text-primary-600 hover:text-primary-900"

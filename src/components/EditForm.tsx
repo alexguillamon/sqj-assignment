@@ -1,12 +1,11 @@
 "use client";
-import { set, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { useState } from "react";
-import { PhotoIcon } from "@heroicons/react/24/solid";
 import { Item } from "~/backend/db";
 import ky from "ky";
 import { useRouter } from "next/navigation";
 import { z } from "zod";
-import { UploadButton, UploadDropzone } from "~/utils/uploadthing";
+import { UploadDropzone } from "~/utils/uploadthing";
 import Image from "next/image";
 import { state$ } from "../app/admin/adminState";
 
@@ -50,6 +49,8 @@ export default function EditForm({ item }: { item?: Item }) {
 
       if (res.data) {
         setStatus("success");
+
+        console.log(res.data);
 
         state$.items.set([...state$.items.get(), res.data]);
 

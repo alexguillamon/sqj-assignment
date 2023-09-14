@@ -1,4 +1,5 @@
 import { GlobeAmericasIcon } from "@heroicons/react/24/outline";
+import Image from "next/image";
 import { db, eq, items } from "~/backend/db";
 
 const breadcrumbs = [{ id: 1, name: "The Best Collection", href: "/" }];
@@ -72,9 +73,11 @@ export default async function ProductPage({
             {/* Image gallery */}
             <div className="mt-8 lg:col-span-7 lg:col-start-1 lg:row-span-3 lg:row-start-1 lg:mt-0">
               <div className="grid grid-cols-1 lg:grid-cols-2 lg:gap-8">
-                <img
+                <Image
                   src={item.imageUrl}
                   alt={item.name}
+                  width={700}
+                  height={1200}
                   className={"lg:col-span-2 lg:row-span-2 rounded-lg"}
                 />
               </div>

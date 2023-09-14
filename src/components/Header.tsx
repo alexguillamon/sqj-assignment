@@ -1,5 +1,6 @@
 "use client";
 import { ShoppingBagIcon } from "@heroicons/react/24/outline";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -26,7 +27,13 @@ export default function Header() {
               <div className="flex flex-1">
                 <Link href="/" className="flex flex-row">
                   <span className="sr-only">SquadJobs Shop</span>
-                  <img className="h-8 w-auto" src="/squadjobs-red.svg" alt="" />
+                  <Image
+                    className="h-8 w-auto"
+                    width={150}
+                    height={150}
+                    src="/squadjobs-red.svg"
+                    alt="SquadJobs Shop Logo"
+                  />
                   <p className="mt-auto ml-0.5 font-bold italic">shop</p>
                 </Link>
               </div>

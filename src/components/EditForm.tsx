@@ -7,6 +7,7 @@ import ky from "ky";
 import { useRouter } from "next/navigation";
 import { z } from "zod";
 import { UploadButton, UploadDropzone } from "~/utils/uploadthing";
+import Image from "next/image";
 
 type StatusType = "idle" | "loading" | "error" | "success";
 
@@ -174,8 +175,10 @@ export default function EditForm({ item }: { item?: Item }) {
                 Product Image
               </label>
               {isUrl.safeParse(imageUrl).success && (
-                <img
+                <Image
                   src={imageUrl}
+                  height={400}
+                  width={400}
                   alt={"Front of men's Basic Tee in black."}
                   className="h-auto w-80 object-cover object-center md:h-60 md:w-auto"
                 />

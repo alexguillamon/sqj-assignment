@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { db } from "~/backend/db";
 
@@ -14,9 +15,11 @@ export default async function HomePage() {
             {items.map((item) => (
               <div key={item.id} className="group relative">
                 <div className="aspect-h-3 aspect-w-2 w-full overflow-hidden rounded-md bg-gray-200  group-hover:opacity-75 lg:h-96">
-                  <img
+                  <Image
                     src={item.imageUrl}
-                    alt={"Front of men's Basic Tee in black."}
+                    alt={item.name}
+                    height={500}
+                    width={350}
                     className="h-full w-full object-cover object-center md:h-full md:w-full"
                   />
                 </div>

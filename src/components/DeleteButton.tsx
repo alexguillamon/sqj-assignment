@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import type { Item } from "~/backend/db";
 import DeleteModal from "./DeleteModal";
+import { set } from "react-hook-form";
 
 type StatusType = "idle" | "loading" | "error" | "success";
 
@@ -12,22 +13,24 @@ export default function DeleteButton({ id }: { id: number }) {
   const [open, setOpen] = useState(false);
   const router = useRouter();
 
-  async function deleteItem(id: number) {
-    try {
-      setStatus("loading");
-      const res = await ky.delete(`/api/items/${id}`).json<{ data: Item }>();
-      if (res.data) {
-        setStatus("success");
-        router.refresh();
-        setOpen(false);
+  function deleteItem(id: number) {
+    return async function () {
+      try {
+        setStatus("loading");
+        const res = await ky.delete(`/api/items/${id}`).json<{ data: Item }>();
+        if (res.data) {
+          setStatus("success");
+          router.refresh();
+          setOpen(false);
+        }
+      } catch (error: any) {
+        setStatus("error");
+        if (error.name === "HTTPError") {
+          const errorJson = await error.response.json();
+          console.log(errorJson);
+        }
       }
-    } catch (error: any) {
-      setStatus("error");
-      if (error.name === "HTTPError") {
-        const errorJson = await error.response.json();
-        console.log(errorJson);
-      }
-    }
+    };
   }
   return (
     <>

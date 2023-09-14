@@ -31,25 +31,26 @@ export default function Header() {
                 </Link>
               </div>
 
-              {/* Flyout menus */}
-              <div className="flex h-14 space-x-8 overflow-x-auto border-t px-4 pb-px sm:h-full sm:justify-center sm:overflow-visible sm:border-t-0 sm:pb-0">
-                {navigation.other.map((item) => (
-                  <Link
-                    key={item.name}
-                    href={item.href}
-                    className={classNames(
-                      path === item.href
-                        ? "border-primary-600 text-primary-600"
-                        : "border-transparent text-gray-700 hover:text-gray-800",
-                      "relative z-10 -mb-px flex items-center border-b-2 pt-px text-sm font-medium transition-colors duration-200 ease-out"
-                    )}
-                  >
-                    {item.name}
-                  </Link>
-                ))}
+              <div className="absolute inset-x-0 bottom-0 sm:static sm:flex-1 sm:self-stretch">
+                <div className="flex h-14 space-x-8 overflow-x-auto border-t px-4 pb-px sm:h-full sm:justify-center sm:overflow-visible sm:border-t-0 sm:pb-0">
+                  {navigation.other.map((item) => (
+                    <Link
+                      key={item.name}
+                      href={item.href}
+                      className={classNames(
+                        path === item.href
+                          ? "border-primary-600 text-primary-600"
+                          : "border-transparent text-gray-700 hover:text-gray-800",
+                        "relative -mb-px flex items-center border-b-2 pt-px text-sm font-medium transition-colors duration-200 ease-out"
+                      )}
+                    >
+                      {item.name}
+                    </Link>
+                  ))}
+                </div>
               </div>
 
-              <div className="flex flex-1 items-center justify-end">
+              <div className="flex md:flex-1 items-center justify-end">
                 {/* Cart */}
                 <div className="ml-4 flow-root lg:ml-8">
                   <a href="#" className="group -m-2 flex items-center p-2">

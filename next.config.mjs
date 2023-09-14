@@ -5,7 +5,7 @@ import "./src/env.mjs";
 const config = {
   reactStrictMode: true,
   images: {
-    domains: ["tailwindui.com", "images.unsplash.com"],
+    domains: ["tailwindui.com", "images.unsplash.com", "utfs.io"],
   },
 };
 

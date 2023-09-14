@@ -36,7 +36,7 @@ export default function DeleteButton({ id }: { id: number }) {
     <>
       <DeleteModal
         open={open}
-        onDelete={() => deleteItem(id)}
+        onDelete={deleteItem(id)}
         onClose={() => setOpen(false)}
       />
       <p

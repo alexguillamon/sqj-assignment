@@ -33,28 +33,18 @@ export default function Header() {
 
               <div className="absolute inset-x-0 bottom-0 sm:static sm:flex-1 sm:self-stretch">
                 <div className="flex h-14 space-x-8 overflow-x-auto border-t px-4 pb-px sm:h-full sm:justify-center sm:overflow-visible sm:border-t-0 sm:pb-0">
-                  {path === "/admin" ? (
-                    <a
-                      href={"/"}
-                      className={
-                        "border-transparent text-gray-700 hover:text-gray-800 relative -mb-px flex items-center border-b-2 pt-px text-sm font-medium transition-colors duration-200 ease-out"
-                      }
-                    >
-                      {"The Best Collection"}
-                    </a>
-                  ) : (
-                    <Link
-                      href={"/"}
-                      className={classNames(
-                        path === "/"
-                          ? "border-primary-600 text-primary-600"
-                          : "border-transparent text-gray-700 hover:text-gray-800",
-                        "relative -mb-px flex items-center border-b-2 pt-px text-sm font-medium transition-colors duration-200 ease-out"
-                      )}
-                    >
-                      {"The Best Collection"}
-                    </Link>
-                  )}
+                  <Link
+                    href={"/"}
+                    className={classNames(
+                      path === "/"
+                        ? "border-primary-600 text-primary-600"
+                        : "border-transparent text-gray-700 hover:text-gray-800",
+                      "relative -mb-px flex items-center border-b-2 pt-px text-sm font-medium transition-colors duration-200 ease-out"
+                    )}
+                  >
+                    {"The Best Collection"}
+                  </Link>
+
                   <Link
                     href={"/admin"}
                     prefetch={false}

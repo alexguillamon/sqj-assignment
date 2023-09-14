@@ -12,23 +12,21 @@ export default function DeleteButton({ id }: { id: number }) {
   const [open, setOpen] = useState(false);
   const router = useRouter();
 
-  function deleteItem(id: number) {
-    return async function () {
-      try {
-        setStatus("loading");
-        const res = await ky.delete(`/api/items/${id}`).json<{ data: Item }>();
-        if (res.data) {
-          setStatus("success");
-          router.refresh();
-        }
-      } catch (error: any) {
-        setStatus("error");
-        if (error.name === "HTTPError") {
-          const errorJson = await error.response.json();
-          console.log(errorJson);
-        }
+  async function deleteItem(id: number) {
+    try {
+      setStatus("loading");
+      const res = await ky.delete(`/api/items/${id}`).json<{ data: Item }>();
+      if (res.data) {
+        setStatus("success");
+        router.refresh();
       }
-    };
+    } catch (error: any) {
+      setStatus("error");
+      if (error.name === "HTTPError") {
+        const errorJson = await error.response.json();
+        console.log(errorJson);
+      }
+    }
   }
   return (
     <>

@@ -4,10 +4,6 @@ import { db, eq, items } from "~/backend/db";
 
 const breadcrumbs = [{ id: 1, name: "The Best Collection", href: "/" }];
 
-function classNames(...classes: string[]) {
-  return classes.filter(Boolean).join(" ");
-}
-
 export default async function ProductPage({
   params,
 }: {

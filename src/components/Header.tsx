@@ -3,10 +3,7 @@ import { ShoppingBagIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-
-function classNames(...classes: string[]) {
-  return classes.filter(Boolean).join(" ");
-}
+import { classNames } from "~/utils/helpers";
 
 export default function Header() {
   const path = usePathname();
@@ -31,6 +28,7 @@ export default function Header() {
                 </Link>
               </div>
 
+              {/* Nav Links */}
               <div className="absolute inset-x-0 bottom-0 sm:static sm:flex-1 sm:self-stretch">
                 <div className="flex h-14 space-x-8 overflow-x-auto border-t px-4 pb-px sm:h-full sm:justify-center sm:overflow-visible sm:border-t-0 sm:pb-0">
                   <Link
@@ -44,7 +42,6 @@ export default function Header() {
                   >
                     {"The Best Collection"}
                   </Link>
-
                   <Link
                     href={"/admin"}
                     prefetch={false}
@@ -60,8 +57,8 @@ export default function Header() {
                 </div>
               </div>
 
+              {/* Cart */}
               <div className="flex md:flex-1 items-center justify-end">
-                {/* Cart */}
                 <div className="ml-4 flow-root lg:ml-8">
                   <a href="#" className="group -m-2 flex items-center p-2">
                     <ShoppingBagIcon

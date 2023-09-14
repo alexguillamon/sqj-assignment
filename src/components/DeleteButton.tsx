@@ -19,6 +19,7 @@ export default function DeleteButton({ id }: { id: number }) {
       if (res.data) {
         setStatus("success");
         router.refresh();
+        setOpen(false);
       }
     } catch (error: any) {
       setStatus("error");

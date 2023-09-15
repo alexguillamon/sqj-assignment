@@ -7,10 +7,8 @@ import { useRouter } from "next/navigation";
 import { z } from "zod";
 import { UploadDropzone } from "~/utils/uploadthing";
 import Image from "next/image";
-import { state$ } from "../app/admin/adminState";
+import { alertState$, state$ } from "../app/admin/adminState";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-
-type StatusType = "idle" | "loading" | "error" | "success";
 
 type Inputs = {
   name: string;
@@ -22,7 +20,6 @@ const isUrl = z.string().url();
 
 export default function EditForm({ item }: { item?: Item }) {
   const [imageUrl, setImageUrl] = useState<string>(item?.imageUrl ?? "");
-  const [status, setStatus] = useState<StatusType>("idle");
   const router = useRouter();
   const {
     register,
@@ -42,7 +39,18 @@ export default function EditForm({ item }: { item?: Item }) {
       // Invalidate and refetch
       queryClient.invalidateQueries({ queryKey: ["items"] });
       state$.items.set([...state$.items.get(), res.data]);
+      alertState$.set({
+        type: "success",
+        message: "Successfully added item",
+      });
       router.push("/admin");
+    },
+    onError: (err) => {
+      alertState$.set({
+        type: "error",
+        message: "Error adding item",
+      });
+      console.error(err);
     },
   });
 
@@ -59,7 +67,18 @@ export default function EditForm({ item }: { item?: Item }) {
       state$.items
         .find((itemObs) => itemObs.get().id === res.data.id)
         ?.set({ ...res.data });
+      alertState$.set({
+        type: "success",
+        message: "Successfully edited item",
+      });
       router.push("/admin");
+    },
+    onError: (err) => {
+      alertState$.set({
+        type: "error",
+        message: "Error editing item",
+      });
+      console.error(err);
     },
   });
 
@@ -174,8 +193,11 @@ export default function EditForm({ item }: { item?: Item }) {
                 endpoint="imageUploader"
                 onClientUploadComplete={(res) => {
                   if (!res || res.length === 0) {
-                    console.log("no res");
-                    setStatus("error");
+                    console.log("no response from upload");
+                    alertState$.set({
+                      type: "error",
+                      message: "Error uploading image",
+                    });
                     return;
                   }
                   setImageUrl(res[0]?.url ?? "");

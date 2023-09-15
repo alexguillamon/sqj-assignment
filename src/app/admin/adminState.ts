@@ -10,6 +10,11 @@ export const state$ = observable<{ items: Item[] }>({
   items: [],
 });
 
+export const alertState$ = observable<{
+  type: "success" | "error";
+  message: string;
+} | null>(null);
+
 persistObservable(state$, {
   persistLocal: ObservablePersistLocalStorage,
   local: "state",

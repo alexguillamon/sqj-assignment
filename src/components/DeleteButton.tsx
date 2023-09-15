@@ -4,7 +4,7 @@ import { useState } from "react";
 import type { Item } from "~/backend/db";
 import DeleteModal from "./DeleteModal";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { state$ } from "../app/admin/adminState";
+import { alertState$, state$ } from "../app/admin/adminState";
 
 export default function DeleteButton({ id }: { id: number }) {
   const [open, setOpen] = useState(false);
@@ -16,8 +16,19 @@ export default function DeleteButton({ id }: { id: number }) {
     onSuccess: (res) => {
       // Invalidate and refetch
       queryClient.invalidateQueries({ queryKey: ["items"] });
-
       state$.items.set(state$.items.get().filter((item) => item.id !== id));
+      alertState$.set({
+        type: "success",
+        message: "Successfully deleted item",
+      });
+      setOpen(false);
+    },
+    onError: (err) => {
+      alertState$.set({
+        type: "error",
+        message: "Error deleting item",
+      });
+      console.error(err);
       setOpen(false);
     },
   });

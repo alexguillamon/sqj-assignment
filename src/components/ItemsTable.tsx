@@ -2,16 +2,16 @@
 import Link from "next/link";
 import DeleteButton from "~/components/DeleteButton";
 import { Item } from "~/backend/db";
-import { state$ } from "~/app/admin/adminState";
+import { alertState$, state$ } from "~/app/admin/adminState";
 import { useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import ky from "ky";
 import { useObservable } from "@legendapp/state/react";
 
 export default function ItemsTable() {
-  const { data, isLoading, error } = useQuery({
+  const { data, isLoading, status, error } = useQuery({
     queryKey: ["items"],
-    queryFn: () => ky.get("/api/items").json<{ data: Item[] }>(),
+    queryFn: () => ky.get("/api/items", { retry: 1 }).json<{ data: Item[] }>(),
   });
   const fakeLoading = useObservable(false);
 
@@ -25,13 +25,23 @@ export default function ItemsTable() {
   }, [data]);
 
   useEffect(() => {
+    if (error) {
+      alertState$.set({
+        type: "error",
+        message: "Error fetching items",
+      });
+      console.log(error);
+    }
+  }, [error, status]);
+
+  useEffect(() => {
     if (!isLoading) return;
     setTimeout(() => {
       fakeLoading.set(false);
     }, 2000);
   }, []);
 
-  if (isLoading || isFakeLoading) {
+  if (isLoading || isFakeLoading || status === "error" || !data) {
     return (
       <div>
         <div
@@ -99,10 +109,6 @@ export default function ItemsTable() {
         </div>
       </div>
     );
-  }
-
-  if (error || !data) {
-    return <div>Error: {JSON.stringify(error)}</div>;
   }
 
   return (

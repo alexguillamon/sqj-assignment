@@ -88,7 +88,10 @@ export default function ItemsTable() {
           <span className="sr-only">Loading...</span>
         </div>
 
-        <div role="status" className=" lg:hidden w-full flex items-center">
+        <div
+          role="status"
+          className=" lg:hidden w-full flex items-center h-[calc(100vh-600px)]"
+        >
           <svg
             aria-hidden="true"
             className="w-10 h-10  mx-auto text-gray-200 animate-spin dark:text-gray-600 fill-primary-600"
